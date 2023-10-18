@@ -26,6 +26,7 @@ html, body {
 
 form {
     & > input {
+        color: white;
         padding: 12px;
         font-size: 1em;
         border-radius: 12px;
@@ -34,10 +35,13 @@ form {
 }
 
 .post-input {
-    width: 35rem;
+    width: 34rem;
+    background-color: transparent;
+    border: solid rgba(255, 255, 255, 0.36);
 }
 .post-send {
-    background-color: #68aef1;
+    background-color: #8868f1;
+    width: 6rem;
     color: white;
     border: none;
     font-weight: 900;
@@ -77,13 +81,20 @@ form {
     padding: 3px;
     border: none;
     border-radius: 2px;
-    background-color: #68aef1;
+    /* background-color: #68aef1; */
+    color: white;
     & > input {
         width: 100%;
         border-radius: inherit;
         border: none;
         background-color: transparent;
-        font-weight: 500;
+        font-weight: 700;
+        color: white;
+        /* box-shadow: inset 2px 2px 24px #68aff159; */
+        transition: background-color 300ms ease-in-out;
+    }
+    & > input:hover {
+        background-color: #8868f1;
     }
 }
 

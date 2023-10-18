@@ -1,0 +1,51 @@
+html, body {
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container {
+    /* background-color: lightsalmon; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auth-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5px;
+    & > input {
+        margin: 5px;
+        width: 100%;
+    }
+    & > p {
+        text-align: left;
+        align-self: flex-start;
+    }
+}
+
+.form-btn {
+    & > input {
+        width: 100%;
+    }
+}
+
+.title {
+    font-size: x-large;
+    font-weight: 700;
+}
