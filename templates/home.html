@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+<!-- Block head content -->
+{%block head%}
+<title>the NetNest</title>
+{%endblock%}
+<!-- Block body content -->
+{%block body%}
+<div class="container">
+  <form action="/home/{{uid}}" , method="POST">
+    <input class="post-input" type="text" name="content" , id="content" />
+    <input class="post-send" type="submit" value="tweet" />
+  </form>
+</div>
+<!-- If there are no posts -->
+{%if posts|length < 1%}
+<h4 style="text-align: center">Woops! No posts in the feed!</h4>
+{%else%}
+<!-- For Loop for posts -->
+{%for post in posts%}
+<!-- div for each post goes here -->
+<div class="post-container">
+  <div class="sender-detail">
+    <p>@{{post.post_user_handle}}</p>
+  </div>
+  <div class="post-content">
+    <p>{{post.post_content}}</p>
+  </div>
+  <form class="comments-button" action="/" , method="POST">
+    <input type="submit" value="View Comments" />
+  </form>
+</div>
+{%endfor%}
+<!-- End of for loop -->
+{%endif%}
+<!-- Ending the if block -->
+{%endblock%}
