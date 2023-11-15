@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+<!-- Body block starts here -->
+{% block body %}
+<h1>netnest\</h1>
+{% if username %}
+<!-- HTML for confirmation or cahnge account -->
+<h2>Profile Options</h2>
+You are currently logged in as {{username}}
+<br />
+Your password is {{password}}
+<!-- If user is signed in ask if they want to open /home -->
+<form action="/home" method="get">
+  <button>Continue Home</button>
+</form>
+
+<!-- If user is signed in ask if they want to signout -->
+<form action="/logout">
+  <button>Logout</button>
+</form>
+
+{% else %}
+
+<!-- Prompt user for signin credentials -->
+<form action="/signin" method="post">
+  <input
+    required
+    autofocus
+    autocomplete="off"
+    type="text"
+    name="username"
+    placeholder="Username"
+  />
+  <input
+    required
+    autofocus
+    autocomplete="off"
+    type="password"
+    name="password"
+    placeholder="Password"
+  />
+  <input type="submit" value="Sign In" />
+</form>
+
+{% endif %} {% endblock %}
