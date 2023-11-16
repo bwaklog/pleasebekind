@@ -12,10 +12,35 @@
 
 <!-- Form input for new post -->
 <p>form input for new post</p>
+<form action="/newpost" , method="post">
+  <input
+    required
+    autocomplete="off"
+    autofocus
+    type="text"
+    name="post_content"
+    placeholder="What's Happening"
+  />
+  <input type="submit" value="POST" />
+</form>
 
 <!-- Div for every post in existance 🙂 -->
-<p>POST</p>
-<p>POST</p>
-<p>POST</p>
-
-{% endblock %}
+{% for post in posts %}
+<div
+  style="
+    border: 2px black solid;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 20px;
+  "
+>
+  <!-- post_id -->
+  <p>{{post[0]}}</p>
+  <!-- username of sender -->
+  <p>{{post[1]}}</p>
+  <!-- content of post -->
+  <p>{{post[2]}}</p>
+  <!-- time of post -->
+  <p>{{post[3]}}</p>
+</div>
+{% endfor %} {% endblock %}

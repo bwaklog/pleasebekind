@@ -1,8 +1,12 @@
+from datetime import timezone
 from flask import Flask, request, render_template, redirect, session
 from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
 import regex as re
+from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = 'pleasebekind'.encode('utf-16')
 
 
 # if flase, if we quit browser the session is deleted
@@ -12,7 +16,16 @@ app.config["SESSION_TYPE"] = "filesystem"
 # Activate session
 Session(app)
 
-# Implement a database here and define the schema
+# app config for database
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posty.db"
+db = SQLAlchemy(app=app)
+
+# Implement a database here and define the schemap
+
+# for now in place of database, storing posts with the 
+# required stuff in a global variable
+POSTS = []
 
 
 @app.route("/")
@@ -59,10 +72,22 @@ def logout():
     return redirect('/')
 
 
+
+
 # route to home page which has a view of all the posts
 @app.route("/home")
 def home():
-    # throw you back to / route if you aren't signed in
     username = session.get("username")
-    if username:
-        return render_template("home.html", username=username)
+    return render_template("home.html", username=username, posts=POSTS[::-1])
+
+
+# on clicking post button, we need to try to append the stuff into sql  
+@app.route("/newpost", methods=["GET", "POST"])
+def newpost():
+    if request.method == "POST":
+        post_id = len(POSTS) + 1
+        username = session.get("username")
+        post_content = request.form.get("post_content")
+        time = datetime.utcnow()
+        POSTS.append((post_id, username, post_content, time))
+        return redirect('/home')
