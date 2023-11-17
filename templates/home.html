@@ -42,5 +42,13 @@
   <p>{{post[2]}}</p>
   <!-- time of post -->
   <p>{{post[3]}}</p>
+
+  <!-- give an option to delete the post for the user -->
+  {% if username == post[1] %}
+  <form action="/deletepost" method="get">
+    <input type="hidden" name="post_id" value="{{post[0]}}" />
+    <button>Delete Post</button>
+  </form>
+  {% else %} {% endif %}
 </div>
 {% endfor %} {% endblock %}

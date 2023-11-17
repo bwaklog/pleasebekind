@@ -26,6 +26,7 @@ db = SQLAlchemy(app=app)
 # for now in place of database, storing posts with the 
 # required stuff in a global variable
 POSTS = []
+USERS = {}
 
 
 @app.route("/")
@@ -47,12 +48,20 @@ def signin():
 
         # check for username validity
         username = request.form.get("username")
+        if " " in username:
+            return render_template("error.html", message="Cant have spaces in a username")
         if not request.form.get("username"):
             return render_template("error.html", message="Invalid Username")
         password = request.form.get("password")
         if not request.form.get("password"):
             return render_template("error.html", message="Invalid Password")
         # check for password validity
+
+        if username in USERS:
+            if USERS[username] != password:
+                return render_template("error.html", message="Invalid password")
+        else:
+            USERS[username] = password
 
         # here we add the homepage route, and before which add the username to session
         session["username"] = username
@@ -67,6 +76,7 @@ def signin():
 def logout():
     # default method is get
     session.clear()
+    session["username"] = ""
     # redirects back to home page once the 
     # session has been cleared
     return redirect('/')
@@ -78,6 +88,8 @@ def logout():
 @app.route("/home")
 def home():
     username = session.get("username")
+    if not username:
+        return redirect('/')
     return render_template("home.html", username=username, posts=POSTS[::-1])
 
 
@@ -91,3 +103,13 @@ def newpost():
         time = datetime.utcnow()
         POSTS.append((post_id, username, post_content, time))
         return redirect('/home')
+
+@app.route("/deletepost", methods=["GET", "POST"])
+def deletepost():
+    if request.method == "GET":
+        post_id = request.args.get("post_id")
+        for id_list in range(len(POSTS)):
+            if str(post_id) == str(POSTS[id_list][0]):
+                POSTS.pop(id_list)
+                return redirect('/home')
+        # return f"post id to be deleted {post_id}"
