@@ -1,0 +1,168 @@
+body {
+    background-color: rgb(0, 0, 0);
+    /* background-color: lightsalmon; */
+    color: white;
+    font-family: sans-serif;
+
+    /* width: 100vh; */
+}
+
+form {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* CSS related to the page header */
+.page-header {
+    display: flex;
+    /* grid-template-columns: 1fr 50px; */
+    flex-direction: row;
+    justify-content:space-between;
+    word-wrap: break-word;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-inline: 50px;
+}
+
+
+.menu-button {
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+    border-radius: 100px;
+    font-size: 2rem;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    filter: invert();
+}
+
+.profile-header {
+    & > form {
+        width: 50px;
+    }
+}
+
+/* CSS Rlated to the post content */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.new-post-entry,
+.new-post-button {
+    font-size: 1.8rem;
+    padding: .5rem;
+    padding-inline: 1.1rem;
+    margin-left: 10px;
+    /* border: 2px solid rgba(205, 205, 205, 0.18); */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-weight: 200;
+    outline: none;
+}
+
+
+.new-post-entry {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.new-post-button {
+    background-color: rgba(253, 75, 75, 0.5);;
+    backdrop-filter: blur(50px);
+    font-weight: 900;
+    transition: background-color 150    ms ease-in-out;
+    &:hover {
+        background-color: rgba(87, 163, 255, 0.486);
+    }
+}
+
+.new-post-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-bottom: 20px;
+    width: 40%;
+    min-width: 20rem;
+
+}
+
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    filter: invert();
+}
+
+.post-container {
+    backdrop-filter: blur(50px);
+    width: 40%;
+    min-width: 20rem;
+
+    margin-bottom: 1rem;
+
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    & > p {
+        margin: 0;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        padding: 0;
+    }
+}
+
+.post-user-options {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: 1rem;
+}
+
+
+.delete-post-form {
+    width: auto;
+}
+
+.delete-post-button {
+    width: fit-content;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+}
+
+.post-sender,
+.post-details {
+    font-size: 1.2rem;
+    opacity: 0.5;
+}
+
+.post-content {
+    font-size: 1.5rem;
+}
+

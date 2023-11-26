@@ -1,45 +1,52 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} {% block head%}
+<link rel="stylesheet" href="{{url_for('static', filename='index.css')}}" />
+{%endblock%}
 
 <!-- Body block starts here -->
 {% block body %}
-<h1>netnest\</h1>
+<h1>netNEST 🪺</h1>
 {% if username %}
 <!-- HTML for confirmation or cahnge account -->
-<h2>Profile Options</h2>
-You are currently logged in as {{username}}
-<br />
-Your password is {{password}}
+<h2>Settings</h2>
+<p class="settings-subtitle">You are currently logged in as {{username}}</p>
 <!-- If user is signed in ask if they want to open /home -->
-<form action="/home" method="get">
-  <button>Continue Home</button>
-</form>
+<div class="settings-container">
+  <form action="/home" method="get" class="settings-form">
+    <button class="settings-button">Home 🏠</button>
+  </form>
 
-<!-- If user is signed in ask if they want to signout -->
-<form action="/logout">
-  <button>Logout</button>
-</form>
+  <!-- If user is signed in ask if they want to signout -->
+  <form action="/logout">
+    <button class="settings-button">Logout 👋</button>
+  </form>
+</div>
 
 {% else %}
 
 <!-- Prompt user for signin credentials -->
-<form action="/signin" method="post">
-  <input
-    required
-    autofocus
-    autocomplete="off"
-    type="text"
-    name="username"
-    placeholder="Username"
-  />
-  <input
-    required
-    autofocus
-    autocomplete="off"
-    type="password"
-    name="password"
-    placeholder="Password"
-  />
-  <input type="submit" value="Sign In" />
-</form>
+<div class="login-container">
+  <form action="/signin" method="post" class="login-form">
+    <input
+      required
+      autofocus
+      autocomplete="off"
+      type="text"
+      name="username"
+      placeholder="Username"
+      class="login-input"
+    />
+    <input
+      required
+      autofocus
+      autocomplete="off"
+      type="password"
+      name="password"
+      placeholder="Password"
+      class="login-input"
+    />
+    <!-- <input type="submit" value="Sign In" /> -->
+    <button class="login-button">Log In</button>
+  </form>
+</div>
 
 {% endif %} {% endblock %}

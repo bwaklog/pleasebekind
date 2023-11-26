@@ -1,0 +1,114 @@
+/*  */
+/* Login Page */
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vh;
+}
+
+.settings-subtitle {
+    margin: 0;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: 0.6;
+}
+
+.settings-button {
+    font-weight: 700;
+    font-size: 1.4rem;
+    width: 15rem;
+    margin-bottom: 12px;
+    padding: 10px;
+
+    background-color: rgba(253, 75, 75, 0.7);
+    border: none;
+    border-radius: 10px;
+
+    transition: background-color 150ms ease-in-out;
+
+    &:hover {
+        background-color: rgba(253, 75, 75);
+    }
+}
+
+
+.login-container {
+    /* background-color: lightcoral; */
+    color: black;
+    min-width: 18%;
+
+    transform: translateY(20vh);
+    width: 100%;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    & > * {
+
+        color: white;
+        width: 25%;
+        min-width: 15rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+
+        border: .2rem solid rgba(255, 255, 255, 0.302);
+
+        background: none;
+    }
+}
+
+.login-input {
+    &:focus {
+        /* border: .2rem solid rgba(255, 255, 255, 0.302); */
+        border: none;
+        outline-color: rgba(253, 75, 75, 0.7);
+        /* outline-offset: .2rem; */
+        outline-width: .2rem;
+        outline-style:groove;
+    }
+}
+
+.login-button {
+    border: none;
+    font-weight: 700;
+
+    box-shadow: ;
+
+    background-color: rgb(253, 75, 75, 0.7);
+    border-radius: 100px;
+
+    transition: background-color 150ms ease-in-out;
+
+    &:hover {
+        background-color: rgb(253, 75, 75, 1);
+    }
+}

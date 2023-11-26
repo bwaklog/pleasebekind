@@ -1,54 +1,70 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} {% block head %}
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+<link rel="stylesheet" href="{{url_for('static', filename='base.css')}}" />
+{% endblock %}
 
 <!-- HTML body -->
 {% block body %}
 
-<h1>netnest/home</h1>
-<p>Logged in as {{username}}</p>
-<!-- An optional index redirect link to logout -->
-<form action="/">
-  <button>Profile Options</button>
-</form>
+<div class="page-header">
+  <!-- <h1>netnest/home</h1> -->
+  <h1>Good evening {{username}} 👋</h1>
+  <div class="profile-header">
+    <!-- An optional index redirect link to logout -->
+    <form action="/">
+      <button class="menu-button">
+        <!-- <span class="material-symbols-outlined"> menu </span> -->
+        ⚙️
+      </button>
+    </form>
+  </div>
+</div>
 
 <!-- Form input for new post -->
-<p>form input for new post</p>
-<form action="/newpost" , method="post">
-  <input
-    required
-    autocomplete="off"
-    autofocus
-    type="text"
-    name="post_content"
-    placeholder="What's Happening"
-  />
-  <input type="submit" value="POST" />
-</form>
 
 <!-- Div for every post in existance 🙂 -->
-{% for post in posts %}
-<div
-  style="
-    border: 2px black solid;
-    padding: 10px;
-    border-radius: 4px;
-    margin: 20px;
-  "
->
-  <!-- post_id -->
-  <p>{{post[0]}}</p>
-  <!-- username of sender -->
-  <p>{{post[1]}}</p>
-  <!-- content of post -->
-  <p>{{post[2]}}</p>
-  <!-- time of post -->
-  <p>{{post[3]}}</p>
-
-  <!-- give an option to delete the post for the user -->
-  {% if username == post[1] %}
-  <form action="/deletepost" method="get">
-    <input type="hidden" name="post_id" value="{{post[0]}}" />
-    <button>Delete Post</button>
+<div class="container">
+  <form action="/newpost" , method="post" class="new-post-container">
+    <input
+      class="new-post-entry"
+      required
+      autocomplete="off"
+      autofocus
+      type="text"
+      name="post_content"
+      placeholder="What's Happening"
+    />
+    <!-- <input class="new-post-button" type="submit" value="POST" /> -->
+    <button class="new-post-button">🚀</button>
   </form>
-  {% else %} {% endif %}
+  {% for post in posts %}
+  <div class="post-container">
+    <!-- post_id -->
+    <!-- <p>{{post[0]}}</p> -->
+    <!-- username of sender -->
+    <div class="post-user-options">
+      <p class="post-sender">@{{post[1]}}</p>
+      <!-- give an option to delete the post for the user -->
+      {% if username == post[1] %}
+      <form action="/deletepost" method="get" class="delete-post-form">
+        <input type="hidden" name="post_id" value="{{post[0]}}" />
+        <button class="delete-post-button">🗑️</button>
+      </form>
+      {% else %} {% endif %}
+    </div>
+    <!-- content of post -->
+    <p class="post-content">{{post[2]}}</p>
+    <!-- time of post -->
+    <p class="post-details">{{(post[3].strftime("%Y-%m-%d • %H:%M"))}}</p>
+  </div>
+  {% endfor %}
 </div>
-{% endfor %} {% endblock %}
+
+{% endblock %}
