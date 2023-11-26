@@ -1,5 +1,7 @@
 from datetime import timezone
 from flask import Flask, request, render_template, redirect, session, url_for
+from sqlalchemy import Integer, String, DateTime
+from sqlalchemy.orm import Mapped, mapped_column
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 import regex as re
@@ -28,6 +30,19 @@ db = SQLAlchemy(app=app)
 POSTS = []
 USERS = {}
 
+class User(db.Model):
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    username: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(String, nullable=Flask)
+
+class Post(db.Model):
+    id: Mapped[int] = mapped_column(Integer, nullable=False,primary_key=True)
+    username: Mapped[str] = mapped_column(String, nullable=False)
+    post_content: Mapped[str] = mapped_column(String, nullable=False)
+    post_time: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
+
+with app.app_context():
+    db.create_all()
 
 @app.route("/")
 def index():
@@ -57,11 +72,23 @@ def signin():
             return render_template("error.html", message="Invalid Password")
         # check for password validity
 
-        if username in USERS:
-            if USERS[username] != password:
-                return render_template("error.html", message="Invalid password")
+
+        user = User.query.filter_by(username=username).first()
+        if user:
+            if user.password != password:
+                # session['username'] = username
+                # session['password'] = password
+                # return redirect('/home')
+                return render_template('error.html', message="Incorrect Password")
         else:
-            USERS[username] = password
+            new_user = User(
+                username=username,
+                password=password
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            # session['username'] = username
+            # session['password'] = password
 
         # here we add the homepage route, and before which add the username to session
         session["username"] = username
@@ -90,26 +117,50 @@ def home():
     username = session.get("username")
     if not username:
         return redirect('/')
-    return render_template("home.html", username=username, posts=POSTS[::-1])
+    
+    POSTS = Post.query.order_by(Post.post_time.desc()).all()
+    qur = []
+    for post in POSTS:
+        qur.append([post.id, post.username, post.post_content, post.post_time])
+    # return render_template("error.html", message=qur)
+    return render_template("home.html", username=username, posts=qur)
 
 
 # on clicking post button, we need to try to append the stuff into sql  
 @app.route("/newpost", methods=["GET", "POST"])
 def newpost():
     if request.method == "POST":
-        post_id = len(POSTS) + 1
+        # post_id = len(POSTS) + 1
         username = session.get("username")
         post_content = request.form.get("post_content")
-        time = datetime.utcnow()
-        POSTS.append((post_id, username, post_content, time))
+        # time = datetime.utcnow()
+
+        new_post = Post(
+            username=username,
+            post_content=post_content
+        )
+        db.session.add(new_post)
+        db.session.commit()
+        # POSTS.append((post_id, username, post_content, time))
         return redirect('/home')
 
 @app.route("/deletepost", methods=["GET", "POST"])
 def deletepost():
     if request.method == "GET":
         post_id = request.args.get("post_id")
-        for id_list in range(len(POSTS)):
-            if str(post_id) == str(POSTS[id_list][0]):
-                POSTS.pop(id_list)
-                return redirect('/home')
-        # return f"post id to be deleted {post_id}"
+        post_to_delete = Post.query.get_or_404(post_id)
+        try:
+            db.session.delete(post_to_delete)
+            db.session.commit()
+            return redirect('/home')
+        except:
+            return render_template('error.html', message='failed to delete post for some reason')
+
+
+
+# Route for profile page
+"""
+Route : localhostbalhblah/profile/?usnm=<username>
+This will be achieved using get request i guess
+Still desiding the layout, and stuff
+"""

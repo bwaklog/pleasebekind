@@ -39,7 +39,7 @@
       autofocus
       type="text"
       name="post_content"
-      placeholder="What's Happening"
+      placeholder="1 min to type 🏃"
     />
     <!-- <input class="new-post-button" type="submit" value="POST" /> -->
     <button class="new-post-button">🚀</button>
@@ -62,9 +62,14 @@
     <!-- content of post -->
     <p class="post-content">{{post[2]}}</p>
     <!-- time of post -->
-    <p class="post-details">{{(post[3].strftime("%Y-%m-%d • %H:%M"))}}</p>
+    <p class="post-details">{{post[3].strftime("%H:%M • %m/%d/%Y")}}</p>
   </div>
   {% endfor %}
 </div>
 
+<script>
+  setInterval(function () {
+    location.reload();
+  }, 60000);
+</script>
 {% endblock %}
