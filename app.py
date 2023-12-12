@@ -6,6 +6,7 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 import regex as re
 from datetime import datetime
+import classifier
 
 app = Flask(__name__)
 app.secret_key = 'pleasebekind'.encode('utf-16')
@@ -134,6 +135,11 @@ def newpost():
         username = session.get("username")
         post_content = request.form.get("post_content")
         # time = datetime.utcnow()
+        classify = classifier.predict(post_content)
+        if classify == 1:
+            return render_template('error.html', message="Post contains hate speech")
+
+        # post_content = f"{post_content} | {classify}"
 
         new_post = Post(
             username=username,
