@@ -1,7 +1,9 @@
 # pleasebekind 🐈
-mini project for end semester python project
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-A communal platform that makes the use of NLP and profanity filters to make social media a safer place to browse
+[![Contributors Display](https://badges.pufler.dev/contributors/bwaklog/pleasebekind?size=50&padding=10&perRow=10&bots=true)](https://badges.pufler.dev)
+
+A communal platform that makes the use of NLP and profanity filters to make social media a safer place to browse. This was a part of the mini project for end semester at [PES University](https://pes.edu/)
 
 Basic routing flow of the flask app
 <img width="1246" alt="image" src="https://github.com/bwaklog/pleasebekind/assets/91192289/d75cdb26-6e85-49f9-9095-095c72639d85">
