@@ -52,12 +52,18 @@
     <div class="post-user-options">
       <p class="post-sender">@{{post[1]}}</p>
       <!-- give an option to delete the post for the user -->
-      {% if username == post[1] %}
-      <form action="/deletepost" method="get" class="delete-post-form">
-        <input type="hidden" name="post_id" value="{{post[0]}}" />
-        <button class="delete-post-button">🗑️</button>
-      </form>
-      {% else %} {% endif %}
+      <div class="post-user-forms">
+        <form action="/reportpost" method="get" class="report-post-form">
+          <input type="hidden" name="post_id" value="{{post[0]}}" />
+          <button class="report-post-button">😡</button>
+        </form>
+        {% if username == post[1] %}
+        <form action="/deletepost" method="get" class="delete-post-form">
+          <input type="hidden" name="post_id" value="{{post[0]}}" />
+          <button class="delete-post-button">🗑️</button>
+        </form>
+        {% else %} {% endif %}
+      </div>
     </div>
     <!-- content of post -->
     <p class="post-content">{{post[2]}}</p>

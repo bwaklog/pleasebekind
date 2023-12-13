@@ -144,12 +144,27 @@ form {
     margin-inline: 1rem;
 }
 
+.post-user-forms {
+    display: flex;
+    flex-direction: row;
+}
 
 .delete-post-form {
     width: auto;
 }
 
 .delete-post-button {
+    width: fit-content;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+}
+
+.report-post-form {
+    width: auto;
+}
+
+.report-post-button {
     width: fit-content;
     font-size: 1.5rem;
     background: none;

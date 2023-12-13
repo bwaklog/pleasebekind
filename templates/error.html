@@ -1,12 +1,23 @@
 {% extends 'layout.html' %}
 <!-- HTML for body -->
-{% block body %}
+{% block head%}
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+<link rel="stylesheet" href="{{url_for('static', filename='base.css')}}" />
+{%endblock %} {% block body %}
 
-<h1>netnest/error</h1>
-<p>Reason : {{message}}</p>
-
-<form action="/">
-  <button>New Login</button>
-</form>
+<div class="container">
+  <h1>netnest/error</h1>
+  <p>Reason : {{message}}</p>
+  <form action="/">
+    <button>New Login</button>
+  </form>
+</div>
 
 {% endblock %}

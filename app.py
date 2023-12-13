@@ -77,9 +77,6 @@ def signin():
         user = User.query.filter_by(username=username).first()
         if user:
             if user.password != password:
-                # session['username'] = username
-                # session['password'] = password
-                # return redirect('/home')
                 return render_template('error.html', message="Incorrect Password")
         else:
             new_user = User(
@@ -88,8 +85,7 @@ def signin():
             )
             db.session.add(new_user)
             db.session.commit()
-            # session['username'] = username
-            # session['password'] = password
+
 
         # here we add the homepage route, and before which add the username to session
         session["username"] = username
@@ -162,7 +158,14 @@ def deletepost():
         except:
             return render_template('error.html', message='failed to delete post for some reason')
 
-
+@app.route('/reportpost', methods=["GET", "POST"])
+def reportpost():
+    if request.method == "GET":
+        post_id = request.args.get("post_id")
+        post_to_report = Post.query.get_or_404(post_id)
+        # importing the classifier module
+        classifier.retrain(post_to_report.post_content)
+        return render_template('error.html', message='Reported a message')
 
 # Route for profile page
 """
